@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emotion Lens</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- Animated background blobs -->
+  <div class="bg-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- Server status -->
+  <div id="server-status" class="status-pill" title="Checking server…">
+    <span class="status-dot"></span>
+    <span class="status-label">Connecting…</span>
+  </div>
+
+  <!-- Main -->
+  <main class="container">
+
+    <!-- Hero -->
+    <header class="hero">
+      <div class="hero-icon">🔮</div>
+      <h1 class="hero-title">
+        Emotion<span class="gradient-text">Lens</span>
+      </h1>
+      <p class="subtitle">Uncover the emotion behind any sentence — powered by a BiGRU deep-learning model.</p>
+    </header>
+
+    <!-- Input Card -->
+    <section class="input-card glass-card">
+      <div class="textarea-wrap">
+        <textarea
+          id="user-text"
+          placeholder="How are you feeling today?"
+          maxlength="2000"
+          rows="4"
+          spellcheck="false"
+        ></textarea>
+        <div class="textarea-border"></div>
+        <span class="char-count"><span id="char-current">0</span><span class="char-sep">/</span>2000</span>
+      </div>
+
+      <div class="input-actions">
+        <div class="hint">Press <kbd>Ctrl</kbd> + <kbd>Enter</kbd> to analyze</div>
+        <button id="analyze-btn" type="button">
+          <span class="btn-label">Analyze Emotion</span>
+          <span class="btn-icon">→</span>
+          <span class="btn-loader" hidden>
+            <span class="spinner"></span>
+          </span>
+        </button>
+      </div>
+    </section>
+
+    <!-- Error -->
+    <div id="error-msg" class="error-msg" hidden>
+      <span class="error-icon">⚠</span>
+      <span class="error-text"></span>
+    </div>
+
+    <!-- Results -->
+    <section id="results" class="results" hidden>
+
+      <!-- Primary Emotion -->
+      <div class="emotion-card glass-card" id="emotion-card">
+        <div class="emotion-glow" id="emotion-glow"></div>
+        <div class="emotion-top">
+          <span id="result-emoji" class="emotion-emoji"></span>
+          <div class="emotion-badge">
+            <span class="badge-label">Detected Emotion</span>
+            <span id="result-label" class="emotion-name"></span>
+          </div>
+        </div>
+        <div class="confidence-ring-wrap">
+          <svg class="confidence-ring" viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="52" />
+            <circle class="ring-fill" id="ring-fill" cx="60" cy="60" r="52" />
+          </svg>
+          <span class="confidence-value" id="confidence-value"></span>
+        </div>
+      </div>
+
+      <!-- Breakdown -->
+      <div class="breakdown glass-card">
+        <h2 class="section-title">
+          <span class="section-title-icon">📊</span>
+          Probability Breakdown
+        </h2>
+        <div id="bars-container" class="bars-container"></div>
+      </div>
+
+      <!-- Analyzed Text -->
+      <div class="analyzed-card glass-card">
+        <h2 class="section-title">
+          <span class="section-title-icon">💬</span>
+          Analyzed Text
+        </h2>
+        <p id="analyzed-text-value" class="analyzed-text-value"></p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-tech">
+      <span class="tech-chip">TensorFlow</span>
+      <span class="tech-chip">BiGRU</span>
+      <span class="tech-chip">FastAPI</span>
+    </div>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
