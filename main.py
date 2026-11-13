@@ -65,6 +65,7 @@ class PredictionResponse(BaseModel):
     all_probabilities : dict[str , float]
 
 class HealthResponse(BaseModel):
+    model_config = {"protected_namespaces": ()}
     status : str
     model_laoded : bool 
     
